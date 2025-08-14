@@ -1,0 +1,15 @@
+src/main/java/com/example/taskmanager/
+├── controller/
+│   └── TaskController.java
+├── dto/
+│   └── TaskDTO.java
+├── model/
+│   └── Task.java
+├── repository/
+│   └── TaskRepository.java
+├── service/
+│   └── TaskService.java
+└── TaskManagerApplication.java
+
+src/main/resources/
+├── application.properties
