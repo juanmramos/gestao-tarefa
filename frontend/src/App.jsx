@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import api from './services/api'
+import './App.css'
 
-const STATUS = ['pendente', 'em_andamento', 'concluida']
+const STATUS = ['PENDENTE', 'EM_ANDAMENTO', 'CONCLUIDA']
 
 export default function App() {
   const [tasks, setTasks] = useState([])
@@ -39,28 +40,33 @@ export default function App() {
   }
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
-      <h1>Gerenciador de Tarefas</h1>
+    <div className="app-container">
+      <h1 className="app-heading">📝 Gerenciador de Tarefas</h1>
 
-      <form onSubmit={createTask}>
+      <form onSubmit={createTask} className="app-form">
         <input
+          className="app-input"
           placeholder="Título"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
         />
         <input
+          className="app-input"
           placeholder="Descrição"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
         />
-        <button type="submit">Criar Tarefa</button>
+        <button type="submit" className="button-primary">
+          Criar Tarefa
+        </button>
       </form>
 
-      <div style={{ marginTop: '20px' }}>
-        <label>Filtrar por status:</label>
+      <div className="filter-section">
+        <label style={{ marginRight: 10 }}>Filtrar por status:</label>
         <select
+          className="select-input"
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         >
@@ -73,13 +79,17 @@ export default function App() {
         </select>
       </div>
 
-      <ul style={{ marginTop: '20px' }}>
+      <ul className="task-list">
         {tasks.map((task) => (
-          <li key={task.id} style={{ marginBottom: '10px' }}>
-            <strong>{task.title}</strong> — {task.description} —{' '}
-            <em>{task.status}</em>
+          <li key={task.id} className="task-item">
             <div>
+              <strong>{task.title}</strong> — {task.description}
+              <br />
+              <span className="badge">{task.status}</span>
+            </div>
+            <div className="task-actions">
               <select
+                className="select-input"
                 value={task.status}
                 onChange={(e) => updateStatus(task.id, e.target.value)}
               >
@@ -89,7 +99,12 @@ export default function App() {
                   </option>
                 ))}
               </select>
-              <button onClick={() => deleteTask(task.id)}>Excluir</button>
+              <button
+                onClick={() => deleteTask(task.id)}
+                className="button-danger"
+              >
+                Excluir
+              </button>
             </div>
           </li>
         ))}
